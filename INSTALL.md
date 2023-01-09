@@ -65,6 +65,12 @@ Ubuntu 22.04, install it from Snaps:
 sudo snap install emqx
 ```
 
+The Web frontend needs to access the EMQX server through reverse proxied web
+sockets. This is achieved by copying the contents of
+[this file](etc/emqx.nginx.conf) into the appropriate section of the nginx
+configuration file `/etc/nginx/sites-available/default`. Keep in mind nginx
+configuration file changes only takes effect after a service restart.
+
 **NOTE:** EMQX installed through Snaps will not automatically start upon system
 boot. You have to start the service manually every time when you restarted the
 server, along with the HCM Datafetcher that it depends on:
@@ -78,3 +84,17 @@ sudo systemctl restart hcm-datafetcher
 
 The default Redis installation shipped with Ubuntu does not come with Redis Time
 Series module. We need to introduce the module manually.
+
+This repository contains a pre-built Redis Time Series module for Linux amd64
+platform. We can simply use that module:
+
+```bash
+echo loadmodule /opt/hcm-docs/lib/redistimeseries.so | \
+	sudo tee -a /etc/redis/redis.conf
+sudo systemctl restart redis
+```
+
+### Install the HCM software packages
+
+Each of the HCM software package has its individual installation guide. Follow
+the instructions in `INSTALL.md` files of each component to install them.
