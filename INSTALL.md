@@ -57,15 +57,6 @@ sockets. This is achieved by copying the contents of
 configuration file `/etc/nginx/sites-available/default`. Keep in mind nginx
 configuration file changes only takes effect after a service restart.
 
-**NOTE:** EMQX installed through Snaps will not automatically start upon system
-boot. You have to start the service manually every time when you restarted the
-server, along with the HCM Datafetcher that it depends on:
-
-```bash
-sudo emqx start
-sudo systemctl restart hcm-datafetcher
-```
-
 ### Redis Time Series
 
 The default Redis installation shipped with Ubuntu does not come with Redis Time
@@ -100,3 +91,66 @@ EXIT;
 
 Each of the HCM software package has its individual installation guide. Follow
 the instructions in `INSTALL.md` files of each component to install them.
+
+### Starting the Server
+
+Due to a limitation in Snap, EMQX installed through Snaps will not automatically start upon system boot. You have to start the service manually every time when
+you restarted the server, along with the HCM Datafetcher that it depends on:
+
+```bash
+sudo emqx start
+sudo systemctl restart hcm-datafetcher
+```
+
+## Deploying the Raspberry Pi nodes
+
+The following steps descrive how the Raspberry Pi nodes are deployed.
+
+### The Operating System
+
+The Raspberry Pi nodes uses the official Raspberry Pi OS image as the basis. If
+the node is based on Raspberry Pi 3, Raspberry Pi 4 or Raspberry Pi Zero 2, the
+64-bit Raspberry Pi OS is preferred. Raspberry Pi Zero W requires the 32-bit
+version. We recommend using the Lite version (headless server version) to reduce
+system resource and power consumption, as well as potential attack surface.
+
+The latest release Raspberry Pi OS no longer have a default user and password,
+and we need SSH access to the node if we are running it headless. In order to prepare for that, we do the following to the boot partition after the image is
+written to the SD card but before it is transferred to the Raspberry Pi:
+
+```bash
+cd /media/`whoami`/boot # change this to reflect where the boot partition is.
+touch ssh
+# change the user name and password as necesssary.
+echo username:`echo 'mypassword' | openssl passwd -6 -stdin` > userconf.txt
+```
+
+### Installing system requirements
+
+We use the following command to install all third-party packages our project
+depends on:
+
+```bash
+sudo apt update
+sudo apt install python3 python-venv libglib2.0-dev
+```
+
+### Checkout all the code
+
+We put all the code into `/opt` folder.
+
+```bash
+sudo mkdir /opt
+sudo chown `id -un`:`id -gn` /opt
+cd /opt
+git clone https://github.com/nursingengineeringlab/pyclient.git
+```
+
+### Install the HCM software packages
+
+Each of the HCM software package has its individual installation guide. Follow
+the instructions in `INSTALL.md` files of each component to install them.
+
+## Copyright
+
+Copyright &copy; 2021-2023 University of Massachusetts Amherst
