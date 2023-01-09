@@ -28,20 +28,6 @@ sudo apt install python3 python-venv libglib2.0-dev nginx mariadb-server redis \
     git build-essential
 ```
 
-Then we prepare the MariaDB database with a user and a database for the app:
-
-```bash
-sudo mysql_secure_installation
-sudo mysql
-```
-
-```sql
-CREATE DATABASE hcm;
-GRANT ALL ON hcm.* TO hcm@localhost IDENTIFIED BY "hcm";
-FLUSH PRIVILEGES;
-EXIT;
-```
-
 ### Checkout all the code
 
 We put all the code into `/opt` folder.
@@ -92,6 +78,22 @@ platform. We can simply use that module:
 echo loadmodule /opt/hcm-docs/lib/redistimeseries.so | \
 	sudo tee -a /etc/redis/redis.conf
 sudo systemctl restart redis
+```
+
+### MariaDB
+
+We prepare the MariaDB database with a user and a database for the app:
+
+```bash
+sudo mysql_secure_installation
+sudo mysql
+```
+
+```sql
+CREATE DATABASE hcm;
+GRANT ALL ON hcm.* TO hcm@localhost IDENTIFIED BY "hcm";
+FLUSH PRIVILEGES;
+EXIT;
 ```
 
 ### Install the HCM software packages
