@@ -12,5 +12,11 @@ information in one Web interface. UMASS HCM has the following components:
 
 ## Table of Contents
 
-* [System Overview](OVERVIEW.md)
+* [System Overview/Theory of Operation](OVERVIEW.md)
+* [User Guide](USERGUIDE.md)
+* [Administration Guide](ADMINGUIDE.md)
 * [Deployment Guide](INSTALL.md)
+
+## Copyright
+
+Copyright &copy; 2021-2023 University of Massachusetts Amherst
