@@ -12,10 +12,16 @@ information in one Web interface. UMASS HCM has the following components:
 
 ## Table of Contents
 
-* [System Overview/Theory of Operation](OVERVIEW.md)
+For users:
+
 * [User Guide](USERGUIDE.md)
+
+For system admins:
+
+* [System Overview/Theory of Operation](OVERVIEW.md)
 * [Administration Guide](ADMINGUIDE.md)
 * [Deployment Guide](INSTALL.md)
+* [FAQ](FAQ.md)
 
 ## Copyright
 
