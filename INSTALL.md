@@ -151,6 +151,12 @@ git clone https://github.com/nursingengineeringlab/pyclient.git
 Each of the HCM software package has its individual installation guide. Follow
 the instructions in `INSTALL.md` files of each component to install them.
 
+### Running the Raspberry Pi code
+
+```bash
+sudo screen /opt/pyclient/venv/bin/python3 /opt/pyclient/ble.py
+```
+
 ## Copyright
 
 Copyright &copy; 2021-2023 University of Massachusetts Amherst
