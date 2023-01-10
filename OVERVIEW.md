@@ -25,4 +25,4 @@ Cloud of Microservices.
 
 ## Cloud of Microservices
 
-The server side of the 
+The server side of the HMS uses a collection of microservices to 
